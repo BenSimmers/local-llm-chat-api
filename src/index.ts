@@ -40,6 +40,29 @@ app.get('/chathistory', async (ctx) => {
   }
 });
 
+async function fetchModels(url: string) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const models = await response.json();
+  return models;
+}
+app.get('/api/models', async (ctx) => {
+  try {
+    const url = ctx.req.query('url');
+    if (!url) {
+      return ctx.json({ error: 'URL is required' }, 400);
+    }
+    const models = await fetchModels(url);
+    return ctx.json({ models }, 200);
+  } catch (error) {
+    return ctx.json({ error: (error as Error).message }, 500);
+  }
+});
+
 serve(
   {
     fetch: app.fetch,
