@@ -10,6 +10,21 @@ type CreateOpenAiCompatibleConfigurationModelProps = {
   baseUrl?: string;
 };
 
+interface ModelsList {
+  models: Models;
+}
+
+interface Models {
+  data: Data[];
+  object: string;
+}
+
+interface Data {
+  id: string;
+  object: string;
+  owned_by: string;
+}
+
 export class OpenAiService {
   async createOpenAiCompatibleConfigurationModel({
     modelName = 'llama-3.2-3b-instruct',
@@ -64,5 +79,16 @@ export class OpenAiService {
     } catch (error) {
       return ctx.json({ error: (error as Error).message }, 500);
     }
+  }
+
+  async fetchModels(url: string): Promise<ModelsList> {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const models = await response.json();
+    return models;
   }
 }
