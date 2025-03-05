@@ -16,9 +16,20 @@ type CreateOpenAiCompatibleConfigurationModelProps = {
 };
 ```
 
-- This api assumes you are using an openai compatible model.
+- This api assumes you are using an openai api compatible model.
 
 ## Installation and Usage
+
+```bash
+make help
+# help                 Print info about all commands
+# build                Build the project
+# start                Start the project
+# lint                 Lint the project
+# fmt                  Format the project
+# deps                 Install dependencies
+# nvm-setup            Setup nvm
+```
 
 ```bash
 pnpm install # make install
