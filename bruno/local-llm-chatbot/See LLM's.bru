@@ -5,7 +5,17 @@ meta {
 }
 
 get {
-  url: 
-  body: none
+  url: http://localhost:3000/api/models?url=http://localhost:1234/v1/models
+  body: json
   auth: none
+}
+
+params:query {
+  url: http://localhost:1234/v1/models
+}
+
+body:json {
+  {
+    "url": "http://localhost:1234/v1/models"
+  }
 }
